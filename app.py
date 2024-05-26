@@ -36,11 +36,11 @@ def show_confirmation_modal():
     with col1:
         if st.button('Sim', key='confirm_sorteio'):
             st.session_state.confirma = True
-            st.experimental_rerun()
+            st.rerun()
     with col2:
         if st.button('Não', key='cancel_sorteio'):
             st.session_state.confirma = False
-            st.experimental_rerun()
+            st.rerun()
 
 # Botão para realizar o sorteio
 if st.button('Sortear comentário'):
@@ -77,26 +77,26 @@ st.write('Esses são todos os comentários realizados:')
 with st.expander('Comentários'):
     st.dataframe(comentarios)
 
-# Expander para os dados
-with st.expander('Dados'):
-    st.subheader('Análise das 15 pessoas que comentaram mais')
+# # Expander para os dados
+# with st.expander('Dados'):
+#     st.subheader('Análise das 15 pessoas que comentaram mais')
 
-    # Contagem de comentários por pessoa
-    comentarios_por_pessoa = comentarios['Nome'].value_counts()
-    total_comentarios = comentarios_por_pessoa.sum()
+#     # Contagem de comentários por pessoa
+#     comentarios_por_pessoa = comentarios['Nome'].value_counts()
+#     total_comentarios = comentarios_por_pessoa.sum()
 
-    # Seleciona apenas os 10 maiores
-    top_15_comentarios = comentarios_por_pessoa.head(15)
+#     # Seleciona apenas os 10 maiores
+#     top_15_comentarios = comentarios_por_pessoa.head(15)
 
-    # Porcentagem de chance de ganhar
-    chance_de_ganhar = (top_15_comentarios / total_comentarios) * 100
+#     # Porcentagem de chance de ganhar
+#     chance_de_ganhar = (top_15_comentarios / total_comentarios) * 100
 
-    # Gráfico de rosca
-    fig, ax = plt.subplots()
-    ax.pie(top_15_comentarios, labels=top_15_comentarios.index, autopct='%1.1f%%', startangle=90, wedgeprops=dict(width=0.3))
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    st.pyplot(fig)
+#     # Gráfico de rosca
+#     fig, ax = plt.subplots()
+#     ax.pie(top_15_comentarios, labels=top_15_comentarios.index, autopct='%1.1f%%', startangle=90, wedgeprops=dict(width=0.3))
+#     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+#     st.pyplot(fig)
 
-    # Exibindo a tabela com a porcentagem de chance de ganhar
-    st.write('Porcentagem de chance de ganhar:')
-    st.dataframe(chance_de_ganhar.reset_index().rename(columns={'Nome': 'Nome', 'count': 'Chance (%)'}))
+#     # Exibindo a tabela com a porcentagem de chance de ganhar
+#     st.write('Porcentagem de chance de ganhar:')
+#     st.dataframe(chance_de_ganhar.reset_index().rename(columns={'Nome': 'Nome', 'count': 'Chance (%)'}))
